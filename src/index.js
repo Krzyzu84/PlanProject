@@ -4,7 +4,6 @@ import "./index.css";
 import App from "./App";
 import { createStore, applyMiddleware, compose } from "redux";
 import rootReducer from "./store/reducers/rootReducer";
-
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import {
@@ -12,23 +11,34 @@ import {
   getFirestore,
   createFirestoreInstance,
 } from "redux-firestore";
-import { ReactReduxFirebaseProvider, getFirebase } from "react-redux-firebase";
+import {
+  ReactReduxFirebaseProvider,
+  getFirebase,
+  isLoaded,
+} from "react-redux-firebase";
 import fbConfig from "./config/fbConfig";
 import firebase from "firebase/app";
 
 const store = createStore(
   rootReducer,
   compose(
-    applyMiddleware(thunk.withExtraArgument({ getFirestore, getFirebase })),
-    reduxFirestore(fbConfig, { attachAuthIsReady: true })
+    applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
+    reduxFirestore(firebase, fbConfig)
   )
 );
 
+const rrfConfig = {
+  userProfile: "users",
+  useFirestoreForProfile: true,
+};
+
 const rrfProps = {
   firebase,
-  config: fbConfig,
+  config: rrfConfig,
   dispatch: store.dispatch,
   createFirestoreInstance,
+  presence: "presence",
+  sessions: "sessions",
 };
 
 ReactDOM.render(

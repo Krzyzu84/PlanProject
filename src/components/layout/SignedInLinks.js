@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Profiler } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { signOut } from "../../store/actions/authActions";
@@ -14,7 +14,7 @@ const SignedInLinks = (props) => {
       </li>
       <li>
         <Link to="/" className="btn btn-floating pink lighten-1">
-          NN
+          {props.profile.initials}
         </Link>
       </li>
     </ul>
