@@ -11,11 +11,7 @@ import {
   getFirestore,
   createFirestoreInstance,
 } from "redux-firestore";
-import {
-  ReactReduxFirebaseProvider,
-  getFirebase,
-  isLoaded,
-} from "react-redux-firebase";
+import { ReactReduxFirebaseProvider, getFirebase } from "react-redux-firebase";
 import fbConfig from "./config/fbConfig";
 import firebase from "firebase/app";
 
